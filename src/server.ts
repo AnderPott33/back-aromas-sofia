@@ -10,7 +10,7 @@ const app: Application = express();
 // Puedes dejarlo vacío app.use(cors()) para permitir todo, 
 // o ser específico (más seguro):
 app.use(cors({
-  origin: 'http://localhost:5174', // Tu URL de Frontend (Vite)
+  origin: '*', // Tu URL de Frontend (Vite)
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
