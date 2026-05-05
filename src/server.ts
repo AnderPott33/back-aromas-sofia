@@ -10,7 +10,7 @@ const app: Application = express();
 // Puedes dejarlo vacío app.use(cors()) para permitir todo, 
 // o ser específico (más seguro):
 app.use(cors({
-  origin: '*', // Tu URL de Frontend (Vite)
+  origin: 'https://back-aromas-sofia.onrender.com/', // Tu URL de Frontend (Vite)
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
