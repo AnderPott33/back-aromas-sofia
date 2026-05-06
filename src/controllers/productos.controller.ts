@@ -18,7 +18,7 @@ const streamUpload = (fileBuffer: Buffer): Promise<any> => {
 
 export const buscarProductos = async (req: Request, res: Response): Promise<void> => {
     try {
-        const result = await query(`SELECT id, nombre, img, compra, venta, activo, creado_en FROM productos ORDER BY id DESC`);
+        const result = await query(`SELECT id, nombre, img, compra, descripcion, venta, activo, creado_en FROM productos ORDER BY id DESC`);
         res.status(200).json(result.rows);
     } catch (error) {
         res.status(500).json(`No se encontraron correspondencias!`);
@@ -27,7 +27,7 @@ export const buscarProductos = async (req: Request, res: Response): Promise<void
 };
 
 export const agregarProducto = async (req: Request, res: Response): Promise<void> => {
-    const { nombre, compra, venta } = req.body;
+    const { nombre, compra, descripcion, venta } = req.body;
     const file = req.file; // Proviene de Multer
 
     try {
@@ -38,8 +38,8 @@ export const agregarProducto = async (req: Request, res: Response): Promise<void
         }
 
         await query(
-            `INSERT INTO productos (nombre, compra, venta, img, activo) VALUES ($1, $2, $3, $4, $5)`,
-            [nombre, compra, venta, imageUrl, true]
+            `INSERT INTO productos (nombre, compra, venta, descripcion, img, activo) VALUES ($1, $2, $3, $4, $5)`,
+            [nombre, compra, venta, descripcion, imageUrl, true]
         );
         res.status(201).json(`Producto "${nombre}" agregado con éxito`);
     } catch (error) {
@@ -49,7 +49,7 @@ export const agregarProducto = async (req: Request, res: Response): Promise<void
 };
 
 export const editarProducto = async (req: Request, res: Response): Promise<void> => {
-    const { id, nombre, compra, venta, activo } = req.body;
+    const { id, nombre, compra, venta, descripcion, activo } = req.body;
     const file = req.file;
 
     try {
@@ -63,8 +63,8 @@ export const editarProducto = async (req: Request, res: Response): Promise<void>
         }
 
         await query(
-            `UPDATE productos SET nombre = $1, img = $2, compra = $3, venta = $4, activo = $5 WHERE id = $6`,
-            [nombre, imageUrl, compra, venta, activo, id]
+            `UPDATE productos SET nombre = $1, img = $2, compra = $3, venta = $4, descripcion = $7, activo = $5 WHERE id = $6`,
+            [nombre, imageUrl, compra, venta, activo, id, descripcion]
         );
 
         res.status(200).json(`Producto ${nombre} actualizado correctamente`);
