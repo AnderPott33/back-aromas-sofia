@@ -38,7 +38,7 @@ export const agregarProducto = async (req: Request, res: Response): Promise<void
         }
 
         await query(
-            `INSERT INTO productos (nombre, compra, venta, descripcion, img, activo) VALUES ($1, $2, $3, $4, $5)`,
+            `INSERT INTO productos (nombre, compra, venta, descripcion, img, activo) VALUES ($1, $2, $3, $4, $5, $6)`,
             [nombre, compra, venta, descripcion, imageUrl, true]
         );
         res.status(201).json(`Producto "${nombre}" agregado con éxito`);
