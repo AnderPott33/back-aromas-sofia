@@ -17,7 +17,7 @@ const PRODUCTOS_TABLE = `
 CREATE TABLE IF NOT EXISTS productos (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
-    descripcion VARCHAR(255),
+    descripcion TEXT,
     compra NUMERIC(38,2),
     venta NUMERIC(38,2),
     img TEXT,
